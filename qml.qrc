@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MainForm.ui.qml</file>
+        <file>images/small.png</file>
+        <file>ColorText.qml</file>
+        <file>images/菜单管理.png</file>
+        <file>images/系统管理.png</file>
+        <file>scripts/myscript.js</file>
+        <file>RowInput.qml</file>
+        <file>FlickableTE.qml</file>
+    </qresource>
+</RCC>
