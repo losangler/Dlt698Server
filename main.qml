@@ -1,186 +1,243 @@
-import QtQuick 2.9
-import QtQuick.Window 2.2
-import QtQuick.Layouts 1.1
-import "scripts/myscript.js" as Script
+import QtQuick 2.12
+import QtQuick.Window 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.2
 
-Window {
+ApplicationWindow {
+    id: window
+
     visible: true
-    width: 640
-    height: 480
+    width: 1024
+    height: 728
     title: qsTr("Hello World")
 
-//    MainForm {
-//        anchors.fill: parent
+    InfoDrawer {
+        id: infoDrawer
+    }
 
-//        mouseArea.onClicked: {
-//            Qt.quit();
-//        }
-//    }
+    menuBar: MenuBar {
 
-    Grid {
-        id: column1
+        Menu {
+            title: qsTr("File")
 
+            Action {
+                text: qsTr("New...")
+            }
+
+            Action {
+                text: qsTr("Open...")
+            }
+
+            Action {
+                text: qsTr("Save")
+            }
+            MenuSeparator {}
+            Action {
+                text: qsTr("Quit")
+            }
+        }
+        Menu {
+            title: qsTr("Edit")
+            Action {
+                text: qsTr("Cut")
+            }
+            Action {
+                text: qsTr("Copy")
+            }
+            Action {
+                text: qsTr("Paste")
+            }
+        }
+        Menu {
+            title: qsTr("Help")
+            Action {
+                text: qsTr("About")
+            }
+        }
+    }
+
+    header: ToolBar {
+        RowLayout {
+            anchors.fill: parent
+            ToolButton {
+                text: qsTr("<")
+                enabled: view.currentIndex > 0
+                onClicked: view.currentIndex --
+            }
+            ToolButton {
+                text: qsTr(">")
+                enabled: view.currentIndex < view.count - 1
+                onClicked: view.currentIndex ++
+            }
+            Label {
+                text: "当前连接：" + "无"
+                elide: Label.ElideRight
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                Layout.fillWidth: true
+            }
+            ToolButton {
+                text: qsTr("⋮")
+                onClicked: infoDrawer.open()
+            }
+        }
+    }
+
+    footer: TabBar {
+        id: bar
+        width: parent.width
+        currentIndex: view.currentIndex
+
+        Repeater {
+            model: ["连接",  "读取",  "设置",  "行为",  "代理"]
+
+            TabButton {
+                text: modelData
+                width: Math.max(100, bar.width / 5)
+
+                onClicked: {
+                    view.currentIndex = bar.currentIndex
+                }
+            }
+        }
+    }
+
+    SwipeView {
+        id: view
+
+        currentIndex: 0
+        anchors.fill: parent
+
+        Page{
+            Column {
+                spacing: 10
+
+                InputRow {
+                    id: ipInput
+                    title: "IP:"
+
+                    height: 50
+                    width: 300
+                }
+                InputRow {
+                    id: portInput
+                    title: "Port:"
+
+                    height: 50
+                    width: 300
+                }
+                ChoseBox {
+                    id: choseInput
+
+                    height: 50
+                    width: 300
+
+                    boxModel: ListModel {
+                        ListElement { text: "Banana" }
+                        ListElement { text: "Apple" }
+                        ListElement { text: "Coconut" }
+                    }
+                }
+            }
+        }
+
+        Page{
+            Text {
+
+                text:"第二页"
+            }
+
+            ObjectMenu {
+                anchors.centerIn: parent
+            }
+        }
+
+        Page{
+            Text {
+
+                text:"第三页"
+            }
+            ListView {
+                width: 100; height: 100
+                anchors.centerIn: parent
+                model: myModel
+                delegate: Rectangle {
+                    height: 25
+                    width: 100
+                    Text { text: "Animal: " + type + ", " + size }
+                }
+            }
+        }
+
+        Page{
+            Text {
+                text:"第四页"
+            }
+
+        }
+
+        Page{
+            Text {
+                text:"第五页"
+            }
+            Button {
+                anchors.centerIn: parent
+
+                text: "Open"
+
+                onClicked: popup.open()
+            }
+
+            Popup {
+                id: popup
+                anchors.centerIn: parent
+                width: 300
+                height: 400
+                modal: true
+                focus: true
+                closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+
+                ObjectTree {
+                    treeModel: myTree
+
+                    anchors.fill: parent
+                }
+            }
+        }
+    }
+
+    PageIndicator {
+        id: indicator
+
+        count: view.count
+        currentIndex: view.currentIndex
+
+        anchors.bottom: view.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
+    }
 
-        columns: 2
-        spacing: 5
+    Component {
+        id: mainView
 
-        Rectangle {
-            color: "lightblue"
-            radius: 10.0
-            width: 50
-            height: 50
+        Column {
+            anchors.centerIn: parent
 
-            Text {
-                anchors.centerIn: parent
-                text: parent.Positioner.index
+            spacing: 10
+
+            Label {
+                id: label
+                text: ""
             }
-        }
 
-        Rectangle {
-            color: "gold"
-            radius: 10.0
-            width: 50
-            height: 50
+            Button {
+                id: getBtn
+                text: "获取"
+                width: 120
+                height: 40
 
-            Text {
-                anchors.centerIn: parent
-                text: parent.Positioner.index
-            }
-        }
-
-
-        Rectangle {
-            color: "lightblue"
-            radius: 10.0
-            width: 50
-            height: 50
-        }
-
-        Rectangle {
-            color: "gold"
-            radius: 10.0
-            width: 50
-            height: 50
-        }
-
-
-    }
-
-    ColorText {
-        id: colorText1
-
-        height: 30
-        z: 20
-
-        anchors.left: column1.left
-        anchors.bottom: column1.top
-
-        textFont {
-            underline: true
-            italic: true
-            letterSpacing: 3
-            wordSpacing: 6
-            weight: Font.ExtraBold
-            pointSize: 20
-        }
-
-        onClicked: {
-            console.log("colorButton: ", buttonColor)
-        }
-
-        Component.onCompleted: {
-            changeDuration(2000)
-            console.log("change duration")
-            Script.calculateWidth(parent)
-        }
-    }
-
-    RowInput {
-        anchors.bottom: colorText1.bottom
-        anchors.left: colorText1.left
-        anchors.margins: 10
-    }
-
-    FlickableTE {
-
-    }
-
-    Item {
-        id: group1
-
-        x: 10; y: 10
-
-        Text { z: 10; text: qsTr("group1")}
-
-        Image {
-            z: 1
-            source: "images/系统管理.png"
-            width: 150; height: width
-        }
-
-        Image {
-            source: "images/菜单管理.png"
-            x: 50; y: 50;width: 150; height: width
-        }
-    }
-
-    Item {
-        id: group2
-
-        x: 400; y: 10
-
-        Text { z: 10; text: qsTr("group2")}
-
-        Image {
-            opacity: 0.7
-            source: "images/系统管理.png"
-            width: 150; height: width
-        }
-
-        Image {
-            source: "images/菜单管理.png"
-            x: 50; y: 50;width: 150; height: width
-            rotation: 30
-        }
-    }
-
-    Item {
-        id: group3
-
-        x: 10; y: 250
-
-        Text { z: 10; text: qsTr("group3")}
-
-        Image {
-            source: "images/系统管理.png"
-            width: 150; height: width
-        }
-
-        Image {
-            source: "images/菜单管理.png"
-            x: 50; y: 50;width: 150; height: width
-            opacity: 0.7
-            scale: -1.3
-        }
-    }
-
-    Item {
-        id: group4
-
-        x: 400; y: 250
-
-        Text { z: 10; text: qsTr("group4")}
-
-        Image {
-            opacity: 0.7
-            source: "images/系统管理.png"
-            width: 150; height: width
-            Image {
-
-                source: "images/菜单管理.png"
-                x: 50; y: 50;width: 150; height: width
+                onClicked: {
+                    label.text = myModel.getValue()
+                }
             }
         }
     }

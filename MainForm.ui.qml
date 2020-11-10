@@ -13,6 +13,12 @@ Rectangle {
         anchors.leftMargin: 1
         anchors.topMargin: 0
         anchors.fill: parent
+
+        ChoseBox {
+            id: choseBox1
+            x: 173
+            y: 137
+        }
     }
 
     Text {

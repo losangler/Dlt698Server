@@ -3,11 +3,16 @@
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
         <file>images/small.png</file>
-        <file>ColorText.qml</file>
         <file>images/菜单管理.png</file>
         <file>images/系统管理.png</file>
         <file>scripts/myscript.js</file>
-        <file>RowInput.qml</file>
-        <file>FlickableTE.qml</file>
+        <file>config/qtquickcontrols.conf</file>
+        <file>ObjectTree.qml</file>
+        <file>ObjectMenu.qml</file>
+        <file>InputRow.qml</file>
+        <file>ChoseBox.qml</file>
+        <file>InfoDrawer.qml</file>
+        <file>InfoList.qml</file>
+        <file>TitleSeparator.qml</file>
     </qresource>
 </RCC>
