@@ -16,37 +16,33 @@ Item {
 
         background: Rectangle{
             anchors.fill: parent
-            color: "white"
+            color: "aliceblue"
             opacity: 1
         }
 
         Column {
 
             anchors.fill: parent
+            anchors.margins: 8
+
+            spacing: 10
 
             TitleSeparator {
-                id: titleS
-                height: 50
-                width: parent.width
                 labelTitle: qsTr("在线终端")
             }
 
             InfoList {
-                width: parent.width - 10
-                height: 200
-                x: parent.x + 5
+                width: parent.width
+                height: parent.height / 4
             }
 
             TitleSeparator {
-                height: 50
-                width: parent.width
                 labelTitle: qsTr("接收数据")
             }
 
             InfoList {
-                width: parent.width - 10
-                height: 200
-                x: parent.x + 5
+                width: parent.width
+                height: parent.height / 4
             }
         }
     }

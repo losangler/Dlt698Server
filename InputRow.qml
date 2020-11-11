@@ -6,6 +6,10 @@ Item {
 
     property var title: qsTr("Title")
     property var desc: qsTr("Enter description")
+    property var textValue: qsTr("")
+
+    height: 50
+    width: label.width + control.width + 10
 
     Row {
         id: row
@@ -14,22 +18,24 @@ Item {
         Label {
             id: label
             text: title
-            width: 64
+            width: Text.width + 10
             height: 40
-            font.pixelSize: 20
+            font.pixelSize: 18
 
             verticalAlignment: Text.AlignVCenter
             leftPadding: 5
         }
         TextField {
             id: control
-            width: 200
+            width: 150
             height: 50
 
             placeholderText: desc
 
             leftPadding: 5
             rightPadding: 5
+
+            text: textValue
         }
     }
 }

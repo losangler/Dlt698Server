@@ -14,5 +14,8 @@
         <file>InfoDrawer.qml</file>
         <file>InfoList.qml</file>
         <file>TitleSeparator.qml</file>
+        <file>PageOne.qml</file>
+        <file>PageTwo.qml</file>
+        <file>InfoTable.qml</file>
     </qresource>
 </RCC>

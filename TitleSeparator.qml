@@ -6,6 +6,9 @@ Item {
 
     property var labelTitle: qsTr("Title")
 
+    width: parent.width
+    height: 50
+
     Column {
         id: column
 
@@ -17,17 +20,16 @@ Item {
             height: 40
 
             text: labelTitle
-            font.pixelSize: 20
+            font.italic: true
+            font.pixelSize: 25
 
             verticalAlignment: Text.AlignVCenter
-            leftPadding: 5
         }
         Rectangle {
             id: separator
-            width: parent.width - 10
+            width: parent.width
             height: 3
-            color: "black"
-            x: parent.x + 5
+            color: "darkcyan"
         }
     }
 }

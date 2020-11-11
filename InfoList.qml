@@ -67,6 +67,7 @@ Item {
         id: listView
 
         anchors.fill: parent
+
         focus: true
         spacing: 5
         clip: true

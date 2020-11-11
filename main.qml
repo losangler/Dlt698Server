@@ -8,7 +8,7 @@ ApplicationWindow {
 
     visible: true
     width: 1024
-    height: 728
+    height: 768
     title: qsTr("Hello World")
 
     InfoDrawer {
@@ -109,46 +109,14 @@ ApplicationWindow {
         anchors.fill: parent
 
         Page{
-            Column {
-                spacing: 10
-
-                InputRow {
-                    id: ipInput
-                    title: "IP:"
-
-                    height: 50
-                    width: 300
-                }
-                InputRow {
-                    id: portInput
-                    title: "Port:"
-
-                    height: 50
-                    width: 300
-                }
-                ChoseBox {
-                    id: choseInput
-
-                    height: 50
-                    width: 300
-
-                    boxModel: ListModel {
-                        ListElement { text: "Banana" }
-                        ListElement { text: "Apple" }
-                        ListElement { text: "Coconut" }
-                    }
-                }
+            PageOne {
+                anchors.fill: parent
             }
         }
 
         Page{
-            Text {
-
-                text:"第二页"
-            }
-
-            ObjectMenu {
-                anchors.centerIn: parent
+            PageTwo {
+                anchors.fill: parent
             }
         }
 
