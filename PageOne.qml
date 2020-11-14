@@ -1,8 +1,14 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
+import MyInterface 1.0
+
 Item {
     id: root
+
+    property Model m_model: Model {
+        userName: qsTr("192.584.783.100")
+    }
 
     Column {
         spacing: 10
@@ -20,7 +26,7 @@ Item {
             InputRow {
                 id: ipInput
                 title: "IP地址:"
-                textValue: qsTr("127.0.0.1")
+                textValue: m_model.userName//qsTr("127.0.0.1")
             }
             InputRow {
                 id: portInput
@@ -124,6 +130,14 @@ Item {
                 id: connectTimeOutInput
                 title: "应用连接超时时间:"
                 textValue: qsTr("1024")
+            }
+        }
+
+        Button {
+            id: updeteBtn
+            text: qsTr("更新数据")
+            onClicked: {
+                m_model = Controller.getModel()
             }
         }
     }

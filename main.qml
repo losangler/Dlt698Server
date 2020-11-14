@@ -34,6 +34,9 @@ ApplicationWindow {
             MenuSeparator {}
             Action {
                 text: qsTr("Quit")
+                onTriggered: {
+                    window.close()
+                }
             }
         }
         Menu {

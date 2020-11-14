@@ -12,9 +12,15 @@
 #include "animalmodel.h"
 #include "treemodel.h"
 
+#include "model/model.h"
+#include "controller/controller.h"
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+    qmlRegisterType<Model>("MyInterface", 1, 0, "Model");
+    qmlRegisterSingletonType<Controller>("MyInterface", 1, 0, "Controller", singletontype_provider);
 
     QQmlApplicationEngine engine;
 
@@ -24,14 +30,6 @@ int main(int argc, char *argv[])
     model.addAnimal(Animal("Quoll", "Small"));
 
     TreeModel treeModel;
-//    QQuickView view;
-//    view.setResizeMode(QQuickView::SizeRootObjectToView);
-
-//    QQmlContext *ctxt = view.rootContext();
-//    ctxt->setContextProperty("myModel", &model);
-
-//    view.setSource(QUrl("qrc:/view.qml"));
-//    view.show();
 
     ::qputenv("QT_QUICK_CONTROLS_CONF", "/home/arm/Dlt698View/config/qtquickcontrols.conf");
 

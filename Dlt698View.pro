@@ -7,7 +7,9 @@ SOURCES += main.cpp \
     dataobject.cpp \
     animalmodel.cpp \
     treeitem.cpp \
-    treemodel.cpp
+    treemodel.cpp \
+    model/model.cpp \
+    controller/controller.cpp
 
 RESOURCES += qml.qrc
 
@@ -21,4 +23,6 @@ HEADERS += \
     dataobject.h \
     animalmodel.h \
     treeitem.h \
-    treemodel.h
+    treemodel.h \
+    model/model.h \
+    controller/controller.h
