@@ -1,14 +1,13 @@
 #include "controller/controller.h"
 
-Controller::Controller(QObject *parent)
-    : QObject(parent)
+
+void Controller::qmlRegister()
 {
 
 }
 
-Model *Controller::getModel() const
+Controller::Controller(std::__cxx11::string qmlName, int versionMajor, int versionMinor, std::__cxx11::string uri)
+    : m_uri(uri), m_qmlName(qmlName), m_versionMajor(versionMajor), m_versionMinor(versionMinor)
 {
-    Model* m = new Model();
-    m->setUserName("Controller");
-    return m;
+
 }

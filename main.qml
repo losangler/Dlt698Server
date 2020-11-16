@@ -128,16 +128,7 @@ ApplicationWindow {
 
                 text:"第三页"
             }
-            ListView {
-                width: 100; height: 100
-                anchors.centerIn: parent
-                model: myModel
-                delegate: Rectangle {
-                    height: 25
-                    width: 100
-                    Text { text: "Animal: " + type + ", " + size }
-                }
-            }
+
         }
 
         Page{
@@ -167,12 +158,6 @@ ApplicationWindow {
                 modal: true
                 focus: true
                 closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
-
-                ObjectTree {
-                    treeModel: myTree
-
-                    anchors.fill: parent
-                }
             }
         }
     }
@@ -187,29 +172,4 @@ ApplicationWindow {
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
-    Component {
-        id: mainView
-
-        Column {
-            anchors.centerIn: parent
-
-            spacing: 10
-
-            Label {
-                id: label
-                text: ""
-            }
-
-            Button {
-                id: getBtn
-                text: "获取"
-                width: 120
-                height: 40
-
-                onClicked: {
-                    label.text = myModel.getValue()
-                }
-            }
-        }
-    }
 }

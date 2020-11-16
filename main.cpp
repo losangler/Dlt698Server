@@ -8,33 +8,23 @@
 #include <QtQuick/qquickitem.h>
 #include <QtQuick/qquickview.h>
 
-#include "dataobject.h"
-#include "animalmodel.h"
-#include "treemodel.h"
+#include "controller/connectcontroller.h"
+#include "config/ConfigXml.h"
 
-#include "model/model.h"
-#include "controller/controller.h"
+const char* uri = "MyInterface";
+const int versionMajor = 1;
+const int versionMinor = 2;
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<Model>("MyInterface", 1, 0, "Model");
-    qmlRegisterSingletonType<Controller>("MyInterface", 1, 0, "Controller", singletontype_provider);
-
-    QQmlApplicationEngine engine;
-
-    AnimalModel model;
-    model.addAnimal(Animal("Wolf", "Medium"));
-    model.addAnimal(Animal("Polar bear", "Large"));
-    model.addAnimal(Animal("Quoll", "Small"));
-
-    TreeModel treeModel;
+    qmlRegisterType<Model>("MyInterface", versionMajor, versionMinor, "Model");
+    qmlRegisterSingletonType<ConnectController>(uri, versionMajor, versionMinor, "ConnectController", ConnectController::singletontype_provider);
 
     ::qputenv("QT_QUICK_CONTROLS_CONF", "/home/arm/Dlt698View/config/qtquickcontrols.conf");
 
-    engine.rootContext()->setContextProperty("myModel", &model);
-    engine.rootContext()->setContextProperty("myTree", &treeModel);
+    QQmlApplicationEngine engine;
     engine.load(QUrl("qrc:/main.qml"));
 
     return app.exec();

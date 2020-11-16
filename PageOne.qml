@@ -1,14 +1,12 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
-import MyInterface 1.0
+import MyInterface 1.2
 
 Item {
     id: root
 
-    property Model m_model: Model {
-        userName: qsTr("192.584.783.100")
-    }
+    property Model m_model: ConnectController.model()
 
     Column {
         spacing: 10
@@ -137,7 +135,7 @@ Item {
             id: updeteBtn
             text: qsTr("更新数据")
             onClicked: {
-                m_model = Controller.getModel()
+                ConnectController.updateModel("gooo")
             }
         }
     }

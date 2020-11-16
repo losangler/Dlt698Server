@@ -1,27 +1,20 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include <QObject>
-#include <QQmlEngine>
-#include "model/model.h"
+#include <string>
 
-class Controller : public QObject
+class Controller
 {
-    Q_OBJECT
-
 public:
-    explicit Controller(QObject *parent = nullptr);
+    virtual void qmlRegister();
 
-    Q_INVOKABLE Model* getModel() const;
+    Controller(std::string qmlName, int versionMajor = 1, int versionMinor = 1, std::string uri = "MyInterface");
+protected:
+    std::string m_uri;
+    int m_versionMajor;
+    int m_versionMinor;
+    std::string m_qmlName;
+
 };
-
-static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
-{
-    Q_UNUSED(engine)
-    Q_UNUSED(scriptEngine)
-
-    Controller *example = new Controller;
-    return example;
-}
 
 #endif

@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick xml
 CONFIG += c++11
 
 SOURCES += main.cpp \
@@ -9,7 +9,10 @@ SOURCES += main.cpp \
     treeitem.cpp \
     treemodel.cpp \
     model/model.cpp \
-    controller/controller.cpp
+    controller/controller.cpp \
+    controller/connectcontroller.cpp \
+    config/ConfigXml.cpp \
+    config/configelement.cpp
 
 RESOURCES += qml.qrc
 
@@ -25,4 +28,7 @@ HEADERS += \
     treeitem.h \
     treemodel.h \
     model/model.h \
-    controller/controller.h
+    controller/controller.h \
+    controller/connectcontroller.h \
+    config/ConfigXml.h \
+    config/configelement.h
