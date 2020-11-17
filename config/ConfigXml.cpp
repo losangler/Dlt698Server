@@ -3,6 +3,10 @@
 
 ConfigXml::ConfigXml()
 {
+    QString path(::qgetenv(this->configXmlEnv));
+    if(!path.isEmpty())
+        this->fileName = path;
+
     this->OpenXML();
 }
 

@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<config>
+    <connection>
+        <server>
+            <port>8888</port>
+            <ip>127.0.0.1</ip>
+            <timeout>3000</timeout>
+            <connectmax>10</connectmax>
+        </server>
+        <frame>
+            <srvaddr>01 02 03 04</srvaddr>
+            <cliaddr>0</cliaddr>
+        </frame>
+        <connect>
+            <protver>0</protver>
+            <clisndmax>1024</clisndmax>
+            <clircvmax>1024</clircvmax>
+            <clircvmaxwindow>1024</clircvmaxwindow>
+            <cliapdumax>1</cliapdumax>
+            <connecttimeout>1024</connecttimeout>
+        </connect>
+    </connection>
+</config>

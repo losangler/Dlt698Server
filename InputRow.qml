@@ -6,7 +6,7 @@ Item {
 
     property var title: qsTr("Title")
     property var desc: qsTr("Enter description")
-    property var textValue: qsTr("")
+    property alias textValue: control.text
 
     height: 50
     width: label.width + control.width + 10

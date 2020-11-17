@@ -16,8 +16,10 @@ public:
     QDomElement getNode() const;
     void setNode(const QDomElement &value);
 
-    bool getIsNull() const;
+    bool IsNull() const;
+
     void setText(QString text);
+    QString getText() const;
 
 private:
     QDomElement node;

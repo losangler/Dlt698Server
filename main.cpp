@@ -13,16 +13,16 @@
 
 const char* uri = "MyInterface";
 const int versionMajor = 1;
-const int versionMinor = 2;
+const int versionMinor = 3;
 
 int main(int argc, char *argv[])
 {
+    ::qputenv("QT_QUICK_CONTROLS_CONF", "../Dlt698View/config/qtquickcontrols.conf");
+
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<Model>("MyInterface", versionMajor, versionMinor, "Model");
+    qmlRegisterType<ServerModel>("MyInterface", versionMajor, versionMinor, "ServerModel");
     qmlRegisterSingletonType<ConnectController>(uri, versionMajor, versionMinor, "ConnectController", ConnectController::singletontype_provider);
-
-    ::qputenv("QT_QUICK_CONTROLS_CONF", "/home/arm/Dlt698View/config/qtquickcontrols.conf");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl("qrc:/main.qml"));

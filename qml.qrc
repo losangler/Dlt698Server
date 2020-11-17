@@ -17,5 +17,6 @@
         <file>PageOne.qml</file>
         <file>PageTwo.qml</file>
         <file>InfoTable.qml</file>
+        <file>config/config.xml</file>
     </qresource>
 </RCC>

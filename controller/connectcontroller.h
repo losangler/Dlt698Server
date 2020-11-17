@@ -1,30 +1,27 @@
 #ifndef CONNECTCONTROLLER_H
 #define CONNECTCONTROLLER_H
 
-#include <QObject>
 #include <QQmlEngine>
-#include "model/model.h"
-#include "controller/controller.h"
+#include "service/serverservice.h"
+#include "controller.h"
 
-class ConnectController : public QObject
+class ConnectController : public Controller
 {
     Q_OBJECT
 
 public:
-    Q_INVOKABLE void updateModel(const QString &name) const;
+    Q_INVOKABLE ServerModel *serverModel();
 
-    Q_INVOKABLE Model *model();
+    Q_INVOKABLE void serverUpdate();
+
+    Q_INVOKABLE void saveConfig();
 
     static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
 
 private:
     explicit ConnectController(QObject *parent = nullptr);
 
-private:
-    Model *m_model = nullptr;
-
-    QString c_connect = "connect";
-    QString c_port = "port";
+    ServerService *m_server;
 };
 
 #endif // CONNECTCONTROLLER_H

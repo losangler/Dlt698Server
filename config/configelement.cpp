@@ -15,7 +15,7 @@ ConfigElement::ConfigElement()
 ConfigElement ConfigElement::findChild(QString key)
 {
     if(this->isNull)
-        return *(new ConfigElement());
+        return *(this);
 
     QDomNode node = this->node.firstChild();
     while (!node.isNull()) {
@@ -45,7 +45,7 @@ void ConfigElement::setNode(const QDomElement &value)
     node = value;
 }
 
-bool ConfigElement::getIsNull() const
+bool ConfigElement::IsNull() const
 {
     return isNull;
 }
@@ -55,4 +55,11 @@ void ConfigElement::setText(QString text)
     if(this->isNull || this->node.firstChild().isNull())
         return;
     this->node.firstChild().setNodeValue(text);
+}
+
+QString ConfigElement::getText() const
+{
+    if(this->isNull || this->node.firstChild().isNull())
+        return "";
+    return this->node.text();
 }

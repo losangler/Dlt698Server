@@ -24,7 +24,9 @@ private:
 
     QDomDocument doc;
     ConfigElement root;
-    const char* fileName = "../config/config.xml";
+
+    QString fileName = "../Dlt698View/config/config.xml";
+    const char* configXmlEnv = "CONFIG_XML_ENV";
 };
 
 #endif

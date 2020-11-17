@@ -1,12 +1,11 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
-import MyInterface 1.2
+import MyInterface 1.3
 
 Item {
     id: root
-
-    property Model m_model: ConnectController.model()
+    property ServerModel m_server: ConnectController.serverModel()
 
     Column {
         spacing: 10
@@ -24,22 +23,38 @@ Item {
             InputRow {
                 id: ipInput
                 title: "IP地址:"
-                textValue: m_model.userName//qsTr("127.0.0.1")
+                textValue: m_server.ip
+                onTextValueChanged: m_server.ip = textValue
             }
             InputRow {
                 id: portInput
                 title: "端口号:"
-                textValue: qsTr("8888")
+                textValue: m_server.port
+                Binding {
+                    target: m_server
+                    property: "port"
+                    value: portInput.textValue
+                }
             }
             InputRow {
                 id: timeOutInput
                 title: "连接超时:"
-                textValue: qsTr("3000")
+                textValue: m_server.timeOut
+                Binding {
+                    target: m_server
+                    property: "timeOut"
+                    value: timeOutInput.textValue
+                }
             }
             InputRow {
                 id: connectMaxInput
                 title: "最大连接数:"
-                textValue: qsTr("10")
+                textValue: m_server.connectMax
+                Binding {
+                    target: m_server
+                    property: "connectMax"
+                    value: connectMaxInput.textValue
+                }
             }
         }
 
@@ -135,7 +150,8 @@ Item {
             id: updeteBtn
             text: qsTr("更新数据")
             onClicked: {
-                ConnectController.updateModel("gooo")
+                ConnectController.serverUpdate()
+                ConnectController.saveConfig()
             }
         }
     }
