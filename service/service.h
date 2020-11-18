@@ -2,6 +2,8 @@
 #define SERVICE_H
 
 #include <QObject>
+#include "model/model.h"
+#include "config/configelement.h"
 
 class Service : public QObject
 {
@@ -9,9 +11,6 @@ class Service : public QObject
 public:
     explicit Service(QObject *parent = nullptr);
 
-signals:
-
-public slots:
 };
 
 #endif // SERVICE_H

@@ -4,8 +4,8 @@
         <server>
             <port>8888</port>
             <ip>127.0.0.1</ip>
-            <timeout>3000</timeout>
-            <connectmax>10</connectmax>
+            <timeOut>3000</timeOut>
+            <connectMax>10</connectMax>
         </server>
         <frame>
             <srvaddr>01 02 03 04</srvaddr>

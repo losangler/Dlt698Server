@@ -19,12 +19,12 @@ ConnectController::ConnectController(QObject *parent)
 
 ServerModel *ConnectController::serverModel()
 {
-    return m_server->serverModel();
+    return qobject_cast<ServerModel*>(m_server->model());
 }
 
 void ConnectController::serverUpdate()
 {
-    m_server->updateServer();
+    m_server->updateModel();
 }
 
 void ConnectController::saveConfig()

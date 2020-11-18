@@ -15,7 +15,8 @@ SOURCES += main.cpp \
     config/configelement.cpp \
     model/servermodel.cpp \
     service/service.cpp \
-    service/serverservice.cpp
+    service/serverservice.cpp \
+    service/connectionservice.cpp
 
 RESOURCES += qml.qrc
 
@@ -37,4 +38,5 @@ HEADERS += \
     config/configelement.h \
     model/servermodel.h \
     service/service.h \
-    service/serverservice.h
+    service/serverservice.h \
+    service/connectionservice.h
