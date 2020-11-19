@@ -9,18 +9,9 @@ class ConnectionService : public Service
 public:
     explicit ConnectionService(QObject* parent = nullptr);
 
-    Model *model() const;
-    void setModel(Model *model);
+    virtual Model *model() const;
 
-    void initModel();
-    void updateModel();
-
-protected:
-    ConfigElement m_elem;
-
-    Model *m_model = nullptr;
-
-    const QString c_connection = "connection";
+    virtual void updateModel();
 };
 
 #endif // CONNECTIONSERVICE_H

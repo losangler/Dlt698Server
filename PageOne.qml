@@ -30,31 +30,19 @@ Item {
                 id: portInput
                 title: "端口号:"
                 textValue: m_server.port
-                Binding {
-                    target: m_server
-                    property: "port"
-                    value: portInput.textValue
-                }
+                onTextValueChanged: m_server.port = textValue
             }
             InputRow {
                 id: timeOutInput
                 title: "连接超时:"
                 textValue: m_server.timeOut
-                Binding {
-                    target: m_server
-                    property: "timeOut"
-                    value: timeOutInput.textValue
-                }
+                onTextValueChanged: m_server.timeOut = textValue
             }
             InputRow {
                 id: connectMaxInput
                 title: "最大连接数:"
                 textValue: m_server.connectMax
-                Binding {
-                    target: m_server
-                    property: "connectMax"
-                    value: connectMaxInput.textValue
-                }
+                onTextValueChanged: m_server.connectMax = textValue
             }
         }
 

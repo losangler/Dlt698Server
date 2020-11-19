@@ -2,10 +2,10 @@
 <config>
     <connection>
         <server>
-            <port>8888</port>
+            <port>9999</port>
             <ip>127.0.0.1</ip>
             <timeOut>3000</timeOut>
-            <connectMax>10</connectMax>
+            <connectMax>100</connectMax>
         </server>
         <frame>
             <srvaddr>01 02 03 04</srvaddr>

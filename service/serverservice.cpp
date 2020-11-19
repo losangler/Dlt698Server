@@ -7,8 +7,15 @@
 ServerService::ServerService(QObject *parent)
     : ConnectionService(parent)
 {
-    m_elem = ConfigXml::instance().getRoot().findChild(c_connection, c_server);
-    m_model = new ServerModel(this);
-    this->initModel();
+    m_model = m_dao.getModel();
 }
 
+Model *ServerService::model() const
+{
+    return m_model;
+}
+
+void ServerService::updateModel()
+{
+    m_dao.saveModel(*m_model);
+}

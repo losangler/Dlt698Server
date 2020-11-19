@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<config>
+    <terminal>
+        <id>id</id>
+        <addr>addr</addr>
+        <status>status</status>
+    </terminal>
+</config>

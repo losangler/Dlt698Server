@@ -18,5 +18,6 @@
         <file>PageTwo.qml</file>
         <file>InfoTable.qml</file>
         <file>config/config.xml</file>
+        <file>config/DBconfig.xml</file>
     </qresource>
 </RCC>

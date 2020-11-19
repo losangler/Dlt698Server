@@ -7,25 +7,16 @@
 #include <QDomDocument>
 
 #include "configelement.h"
+#include "databasexml.h"
 
-class ConfigXml
+class ConfigXml : public DataBaseXml
 {
 public:
-    bool OpenXML();
-
-    void Save();
-
     static ConfigXml& instance();
-
-    ConfigElement getRoot() const;
 
 private:
     explicit ConfigXml();
 
-    QDomDocument doc;
-    ConfigElement root;
-
-    QString fileName = "../Dlt698View/config/config.xml";
     const char* configXmlEnv = "CONFIG_XML_ENV";
 };
 

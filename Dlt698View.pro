@@ -16,7 +16,11 @@ SOURCES += main.cpp \
     model/servermodel.cpp \
     service/service.cpp \
     service/serverservice.cpp \
-    service/connectionservice.cpp
+    service/connectionservice.cpp \
+    dao/serverxmldao.cpp \
+    model/terminalmodel.cpp \
+    config/databasexml.cpp \
+    dao/terminaldao.cpp
 
 RESOURCES += qml.qrc
 
@@ -39,4 +43,10 @@ HEADERS += \
     model/servermodel.h \
     service/service.h \
     service/serverservice.h \
-    service/connectionservice.h
+    service/connectionservice.h \
+    dao/xmldao.h \
+    model/terminalmodel.h \
+    config/databasexml.h \
+    dao/serverxmldao.h \
+    dao/databasedao.h \
+    dao/terminaldao.h
