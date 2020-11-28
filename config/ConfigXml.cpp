@@ -2,13 +2,14 @@
 #include <QDebug>
 
 ConfigXml::ConfigXml()
-    : DataBaseXml("../Dlt698View/config/config.xml")
+    : DomXml("../Dlt698View/config/config.xml")
 {
-    QString path(::qgetenv(this->configXmlEnv));
-    if(!path.isEmpty())
-        this->setFileName(path);
-
     this->OpenXML();
+}
+
+const char *ConfigXml::getConfigEnv()
+{
+    return "CONFIG_XML_ENV";
 }
 
 ConfigXml &ConfigXml::instance()

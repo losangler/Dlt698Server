@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
-import MyInterface 1.3
+import MyInterface 1.4
 
 Item {
     id: root
@@ -142,5 +142,13 @@ Item {
                 ConnectController.saveConfig()
             }
         }
+        Button {
+            id: testBtn
+            text: qsTr("更新数据")
+            onClicked: {
+                ConnectController.getAllTermianl()
+            }
+        }
+
     }
 }

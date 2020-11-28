@@ -1,15 +1,10 @@
 #ifndef CONFIGXML_H
 #define CONFIGXML_H
 
-#include <QObject>
-#include <QFile>
-#include <QMap>
-#include <QDomDocument>
-
 #include "configelement.h"
-#include "databasexml.h"
+#include "domxml.h"
 
-class ConfigXml : public DataBaseXml
+class ConfigXml : public DomXml
 {
 public:
     static ConfigXml& instance();
@@ -17,7 +12,9 @@ public:
 private:
     explicit ConfigXml();
 
-    const char* configXmlEnv = "CONFIG_XML_ENV";
+    // DataBaseXml interface
+public:
+    virtual const char* getConfigEnv() override;
 };
 
 #endif

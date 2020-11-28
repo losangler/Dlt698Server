@@ -1,8 +1,44 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <config>
+    <database>
+        <hostName>127.0.0.1</hostName>
+        <port>3306</port>
+        <databaseName>test</databaseName>
+        <username>root</username>
+        <password>arm</password>
+        <databaseType>QSQLITE</databaseType>
+        <connectSize>10</connectSize>
+    </database>
     <terminal>
         <id>id</id>
         <addr>addr</addr>
         <status>status</status>
     </terminal>
+    <tables>
+        <sqls>
+        CREATE TABLE IF NOT EXISTS terminal (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        addr VARCHAR(40) NOT NULL UNIQUE,
+        status INTEGER NOT NULL);
+
+        CREATE TABLE IF NOT EXISTS terminalInfo (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        terminal_id INTEGER,
+        current INTEGER,
+        longitude REAL,
+        latitude REAL,
+        height INTEGER,
+        date_time DATETIME,
+        FOREIGN KEY (terminal_id) REFERENCES terminal(id));
+
+        CREATE VIEW IF NOT EXISTS v_terminal
+        (id,addr,status,current,longitude,latitude,height,date_time)
+        as select
+        terminalInfo.id,terminal.addr,terminal.status,terminalInfo.current,terminalInfo.longitude,terminalInfo.latitude,terminalInfo.height,terminalInfo.date_time
+        from terminal,terminalInfo
+        where terminal.id=terminalInfo.terminal_id;
+
+        DROP VIEW v_terminal
+        </sqls>
+    </tables>
 </config>

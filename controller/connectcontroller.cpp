@@ -1,5 +1,6 @@
 #include "connectcontroller.h"
 #include "config/ConfigXml.h"
+#include <QDebug>
 
 QObject *ConnectController::singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -15,6 +16,7 @@ ConnectController::ConnectController(QObject *parent)
     : Controller(parent)
 {
     this->m_server = new ServerService(this);
+    this->m_tService = new TerminalService(this);
 }
 
 ServerModel *ConnectController::serverModel()
@@ -30,5 +32,10 @@ void ConnectController::serverUpdate()
 void ConnectController::saveConfig()
 {
     ConfigXml::instance().Save();
+}
+
+void ConnectController::getAllTermianl()
+{
+    m_tService->test();
 }
 

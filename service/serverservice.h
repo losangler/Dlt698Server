@@ -21,8 +21,6 @@ private:
     ServerModel* m_model;
 
     ServerXmlDao m_dao;
-
-    TerminalDao m_terminalDao;
 };
 
 #endif // SERVERSERVICE_H

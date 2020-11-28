@@ -1,61 +1,56 @@
 #include "databasexml.h"
-#include <QDebug>
+#include "configelement.h"
 
-DataBaseXml::DataBaseXml(const QString &fileName)
-    : m_fileName(fileName)
+DataBaseXml &DataBaseXml::instance()
 {
-
+    static DataBaseXml instance;
+    return instance;
 }
 
-bool DataBaseXml::OpenXML()
+void DataBaseXml::init()
 {
-    QFile file(m_fileName);
-
-    if(!file.open(QIODevice::ReadOnly | QFile::Text))
+    QDomNode node = this->getRoot().getNode().firstChild();
+    while (!node.isNull())
     {
-        qDebug() << m_fileName << "open failed";
-        return false;
+        if(node.isElement())
+        {
+            QDomElement elem = node.toElement();
+            QDomNode n_node = elem.firstChild();
+            while(!n_node.isNull())
+            {
+                if(n_node.isElement())
+                {
+                    QDomElement n_elem = n_node.toElement();
+                    m_tables[elem.tagName()][n_elem.tagName()] = n_elem.text();
+                }
+                n_node = n_node.nextSibling();
+            }
+
+        }
+        node = node.nextSibling();
     }
-
-    QString error;
-    int row = 0, column = 0;
-    if(!doc.setContent(&file, false, &error, &row, &column))
-    {
-        qDebug() << "parse file failed at line row and column" + QString::number(row, 10) + QString(",") + QString::number(column, 10);
-        file.close();
-        return false;
-    }
-    root.setNode(doc.documentElement());
-    file.close();
-
-    return true;
 }
 
-void DataBaseXml::Save()
+DataBaseXml::DataBaseXml()
+    : DomXml("../Dlt698View/config/DBconfig.xml")
 {
-    QFile file(m_fileName);
-    if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-        qDebug() << m_fileName << "open failed";
-        return;
-    }
-
-    QTextStream out(&file);
-    doc.save(out, 4);
-    file.close();
+    this->OpenXML();
+    this->init();
+    this->CloseXml();
 }
 
-ConfigElement DataBaseXml::getRoot() const
+const char *DataBaseXml::getConfigEnv()
 {
-    return root;
+    return "DATA_BASE_ENV";
 }
 
-QString DataBaseXml::getFileName() const
+QHash<QString, QHash<QString, QString> > DataBaseXml::getTables() const
 {
-    return m_fileName;
+    return m_tables;
 }
 
-void DataBaseXml::setFileName(const QString &fileName)
+QHash<QString, QString> DataBaseXml::getTable(const QString &tableName) const
 {
-    m_fileName = fileName;
+    return m_tables.value(tableName);
 }
+

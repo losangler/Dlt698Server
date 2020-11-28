@@ -3,6 +3,7 @@
 
 #include <QQmlEngine>
 #include "service/serverservice.h"
+#include "service/terminalservice.h"
 #include "controller.h"
 
 class ConnectController : public Controller
@@ -16,12 +17,16 @@ public:
 
     Q_INVOKABLE void saveConfig();
 
+    Q_INVOKABLE void getAllTermianl();
+
     static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
 
 private:
     explicit ConnectController(QObject *parent = nullptr);
 
     ServerService *m_server;
+
+    TerminalService *m_tService;
 };
 
 #endif // CONNECTCONTROLLER_H

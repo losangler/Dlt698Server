@@ -1,31 +1,30 @@
 #ifndef DATABASEXML_H
 #define DATABASEXML_H
 
-#include <QObject>
-#include <QFile>
-#include <QMap>
-#include <QDomDocument>
+#include <QHash>
 
 #include "configelement.h"
+#include "domxml.h"
 
-class DataBaseXml
+class DataBaseXml : public DomXml
 {
 public:
-    explicit DataBaseXml(const QString &fileName = "config.xml");
+    static DataBaseXml& instance();
 
-    bool OpenXML();
+    void init();
 
-    void Save();
+    QHash<QString, QHash<QString, QString> > getTables() const;
 
-    ConfigElement getRoot() const;
+    QHash<QString, QString> getTable(const QString& tableName) const;
+private:
+    explicit DataBaseXml();
 
-    QString getFileName() const;
-    void setFileName(const QString &fileName);
+    // DomXml interface
+public:
+    virtual const char *getConfigEnv() override;
 
 private:
-    QString m_fileName;
-    QDomDocument doc;
-    ConfigElement root;
+    QHash<QString, QHash<QString, QString> > m_tables;
 };
 
 #endif // DATABASEXML_H

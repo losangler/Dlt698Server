@@ -1,4 +1,5 @@
 #include "terminalmodel.h"
+#include <QVariant>
 
 TerminalModel::TerminalModel(QObject *parent)
     : Model(parent)
@@ -13,6 +14,8 @@ int TerminalModel::id() const
 
 void TerminalModel::setId(int id)
 {
+    this->setNotNull("id");
+
     if(m_id == id)
         return;
     m_id = id;
@@ -26,6 +29,8 @@ QString TerminalModel::addr() const
 
 void TerminalModel::setAddr(const QString &addr)
 {
+    this->setNotNull("addr");
+
     if(m_addr == addr)
         return;
     m_addr = addr;
@@ -39,6 +44,8 @@ int TerminalModel::status() const
 
 void TerminalModel::setStatus(int status)
 {
+    this->setNotNull("status");
+
     if(m_status == status)
         return;
     m_status = status;
