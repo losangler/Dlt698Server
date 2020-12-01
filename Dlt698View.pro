@@ -58,3 +58,5 @@ HEADERS += \
     config/domxml.h \
     service/terminalservice.h \
     util/dbmanager.h
+
+DISTFILES +=

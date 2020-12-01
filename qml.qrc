@@ -19,5 +19,10 @@
         <file>InfoTable.qml</file>
         <file>config/config.xml</file>
         <file>config/DBconfig.xml</file>
+        <file>PageThree.qml</file>
+        <file>taskMap.html</file>
+        <file>PageFour.qml</file>
+        <file>images/Address.png</file>
+        <file>PageFive.qml</file>
     </qresource>
 </RCC>

@@ -14,7 +14,7 @@
 
 const char* uri = "MyInterface";
 const int versionMajor = 1;
-const int versionMinor = 4;
+const int versionMinor = 5;
 
 int main(int argc, char *argv[])
 {
@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     qmlRegisterType<ServerModel>("MyInterface", versionMajor, versionMinor, "ServerModel");
+    qmlRegisterType<QSqlQueryModel>(uri, versionMajor, versionMinor, "QSqlQueryModel");
     qmlRegisterSingletonType<ConnectController>(uri, versionMajor, versionMinor, "ConnectController", ConnectController::singletontype_provider);
 
     QQmlApplicationEngine engine;

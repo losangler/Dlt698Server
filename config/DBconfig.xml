@@ -36,9 +36,7 @@
         as select
         terminalInfo.id,terminal.addr,terminal.status,terminalInfo.current,terminalInfo.longitude,terminalInfo.latitude,terminalInfo.height,terminalInfo.date_time
         from terminal,terminalInfo
-        where terminal.id=terminalInfo.terminal_id;
-
-        DROP VIEW v_terminal
+        where terminal.id=terminalInfo.terminal_id
         </sqls>
     </tables>
 </config>

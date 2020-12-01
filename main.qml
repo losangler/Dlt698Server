@@ -124,40 +124,22 @@ ApplicationWindow {
         }
 
         Page{
-            Text {
+//            PageThree {
+//                anchors.fill: parent
+//            }
 
-                text:"第三页"
+        }
+
+        Page{
+            PageFour {
+                anchors.fill: parent
             }
 
         }
 
         Page{
-            Text {
-                text:"第四页"
-            }
-
-        }
-
-        Page{
-            Text {
-                text:"第五页"
-            }
-            Button {
-                anchors.centerIn: parent
-
-                text: "Open"
-
-                onClicked: popup.open()
-            }
-
-            Popup {
-                id: popup
-                anchors.centerIn: parent
-                width: 300
-                height: 400
-                modal: true
-                focus: true
-                closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+            PageFive {
+                anchors.fill: parent
             }
         }
     }

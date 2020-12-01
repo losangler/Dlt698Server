@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
-import MyInterface 1.4
+import MyInterface 1.5
 
 Item {
     id: root

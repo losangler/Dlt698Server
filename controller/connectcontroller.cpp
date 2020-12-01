@@ -39,3 +39,8 @@ void ConnectController::getAllTermianl()
     m_tService->test();
 }
 
+QSqlQueryModel *ConnectController::sqlModel()
+{
+    return m_tService->testSql();
+}
+

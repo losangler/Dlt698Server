@@ -19,6 +19,8 @@ public:
 
     Q_INVOKABLE void getAllTermianl();
 
+    Q_INVOKABLE QSqlQueryModel *sqlModel();
+
     static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
 
 private:
