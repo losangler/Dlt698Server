@@ -35,18 +35,3 @@ void TerminalService::test()
     //    m_dao.deleteBy("66 66", "addr");
 }
 
-QSqlQueryModel *TerminalService::testSql()
-{
-   DbManager manager;
-   manager.query().prepare("select * from v_terminal");
-   if(!manager.query().exec())
-   {
-       qDebug() << manager.query().lastError();
-   }
-
-   QSqlQueryModel *model = new QSqlQueryModel();
-   model->setQuery(manager.query());
-
-   return model;
-}
-

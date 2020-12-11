@@ -14,6 +14,15 @@
         <addr>addr</addr>
         <status>status</status>
     </terminal>
+    <terminalInfo>
+        <id>id</id>
+        <terminalId>terminal_id</terminalId>
+        <current>current</current>
+        <longitude>longitude</longitude>
+        <latitude>latitude</latitude>
+        <height>height</height>
+        <dateTime>date_time</dateTime>
+    </terminalInfo>
     <tables>
         <sqls>
         CREATE TABLE IF NOT EXISTS terminal (
@@ -32,7 +41,6 @@
         FOREIGN KEY (terminal_id) REFERENCES terminal(id));
 
         CREATE VIEW IF NOT EXISTS v_terminal
-        (id,addr,status,current,longitude,latitude,height,date_time)
         as select
         terminalInfo.id,terminal.addr,terminal.status,terminalInfo.current,terminalInfo.longitude,terminalInfo.latitude,terminalInfo.height,terminalInfo.date_time
         from terminal,terminalInfo

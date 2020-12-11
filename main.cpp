@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+#include <QApplication>
 #include <QStringList>
 #include <QQmlApplicationEngine>
 
@@ -14,7 +14,7 @@
 
 const char* uri = "MyInterface";
 const int versionMajor = 1;
-const int versionMinor = 5;
+const int versionMinor = 8;
 
 int main(int argc, char *argv[])
 {
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
     ::qputenv("QT_QUICK_CONTROLS_CONF", "../Dlt698View/config/qtquickcontrols.conf");
 
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     qmlRegisterType<ServerModel>("MyInterface", versionMajor, versionMinor, "ServerModel");
     qmlRegisterType<QSqlQueryModel>(uri, versionMajor, versionMinor, "QSqlQueryModel");

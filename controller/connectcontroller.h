@@ -4,6 +4,8 @@
 #include <QQmlEngine>
 #include "service/serverservice.h"
 #include "service/terminalservice.h"
+#include "service/terminalinfoservice.h"
+#include "service/terminalviewservice.h"
 #include "controller.h"
 
 class ConnectController : public Controller
@@ -19,7 +21,9 @@ public:
 
     Q_INVOKABLE void getAllTermianl();
 
-    Q_INVOKABLE QSqlQueryModel *sqlModel();
+    Q_INVOKABLE QSqlQueryModel *terminalViewModel(int offset = 0, int limit = 10);
+
+    Q_INVOKABLE int getTerminalViewPages(int limit = 10);
 
     static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
 
@@ -29,6 +33,10 @@ private:
     ServerService *m_server;
 
     TerminalService *m_tService;
+
+    TerminalInfoService *m_tiService;
+
+    TerminalViewService *m_terminalViewService;
 };
 
 #endif // CONNECTCONTROLLER_H

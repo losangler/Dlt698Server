@@ -18,8 +18,6 @@ class DataBaseDao : public QObject
 public:
     explicit DataBaseDao(const QString& tableName,QObject* parent = nullptr);
 
-    bool queryExec(DbManager& manager);
-
     QList<T *> list();
 
     QList<T *> selectBy(const QVariant &value, const char* key = "id");
@@ -60,7 +58,7 @@ QList<T *> DataBaseDao<T>::selectBy(const QVariant &value, const char *key)
     DbManager manager("select error");
     manager.query().prepare(sql);
     manager.query().addBindValue(value);
-    if(this->queryExec(manager) == true)
+    if(manager.queryExec() == true)
     {
         return this->dataToObject(manager.query());
     }
@@ -106,7 +104,7 @@ bool DataBaseDao<T>::save(T &model)
         manager.query().addBindValue(model.property(property));
     }
 
-    return this->queryExec(manager);
+    return manager.queryExec();
 }
 
 template<typename T>
@@ -137,7 +135,7 @@ bool DataBaseDao<T>::update(T &model, const char *key)
         manager.query().addBindValue(model.property(property));
     }
     manager.query().addBindValue(model.property(key));
-    return this->queryExec(manager);
+    return manager.queryExec();
 }
 
 template<typename T>
@@ -147,7 +145,7 @@ bool DataBaseDao<T>::deleteBy(const QVariant &value, const char *key)
     DbManager manager("delete error");
     manager.query().prepare(sql);
     manager.query().addBindValue(value);
-    return this->queryExec(manager);
+    return manager.queryExec();
 }
 
 template<typename T>
@@ -164,33 +162,13 @@ QList<T*> DataBaseDao<T>::dataToObject(QSqlQuery &query)
         for(int i = 1;i < propertyCnt;i ++)
         {
             const char* property = metaObj->property(i).name();
-            if(!rec.contains(property))
+            if(!rec.contains(m_table.value(property)))
                 continue;
             model->setProperty(property, query.value(rec.indexOf(m_table.value(property))));
         }
         res.push_back(model);
     }
     return res;
-}
-
-template<typename T>
-bool DataBaseDao<T>::queryExec(DbManager &manager)
-{
-    if(!manager.query().exec())
-    {
-        if(!manager.db().open())
-        {
-            qDebug() << "reopen failed" << manager.db().lastError() << manager.query().lastQuery();
-            return false;
-        }
-        manager.setQuery(QSqlQuery(manager.query().lastQuery(), manager.db()));
-        if(!manager.query().exec())
-        {
-            qDebug() << manager.error() << manager.query().lastError() << manager.query().lastQuery();
-            return false;
-        }
-    }
-    return true;
 }
 
 #endif // DATABASEDAO_H

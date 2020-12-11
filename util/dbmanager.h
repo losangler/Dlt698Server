@@ -12,6 +12,8 @@ public:
 
     QSqlDatabase& db();
 
+    bool queryExec();
+
     void setDb(const QSqlDatabase &db);
 
     QSqlQuery& query();

@@ -17,6 +17,25 @@ QSqlDatabase &DbManager::db()
     return m_db;
 }
 
+bool DbManager::queryExec()
+{
+    if(!m_query.exec())
+    {
+        if(!m_db.open())
+        {
+            qDebug() << "reopen failed" << m_db.lastError() << m_query.lastQuery();
+            return false;
+        }
+        this->setQuery(QSqlQuery(m_query.lastQuery(), m_db));
+        if(!m_query.exec())
+        {
+            qDebug() << m_error << m_query.lastError() << m_query.lastQuery();
+            return false;
+        }
+    }
+    return true;
+}
+
 void DbManager::setDb(const QSqlDatabase &db)
 {
     m_db = db;

@@ -11,8 +11,6 @@ public:
 
     void test();
 
-    QSqlQueryModel* testSql();
-
 private:
     TerminalDao m_dao;
 };

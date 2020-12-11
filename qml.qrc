@@ -24,5 +24,7 @@
         <file>PageFour.qml</file>
         <file>images/Address.png</file>
         <file>PageFive.qml</file>
+        <file>SqlTable.qml</file>
+        <file>TagLabel.qml</file>
     </qresource>
 </RCC>

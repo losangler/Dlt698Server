@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick xml sql
+QT += qml quick xml sql charts
 CONFIG += c++11
 
 SOURCES += main.cpp \
@@ -24,7 +24,12 @@ SOURCES += main.cpp \
     util/connectionpool.cpp \
     config/domxml.cpp \
     service/terminalservice.cpp \
-    util/dbmanager.cpp
+    util/dbmanager.cpp \
+    model/terminalinfomodel.cpp \
+    dao/terminalinfodao.cpp \
+    service/terminalinfoservice.cpp \
+    util/sqltablemanager.cpp \
+    service/terminalviewservice.cpp
 
 RESOURCES += qml.qrc
 
@@ -57,6 +62,10 @@ HEADERS += \
     util/connectionpool.h \
     config/domxml.h \
     service/terminalservice.h \
-    util/dbmanager.h
+    util/dbmanager.h \
+    model/terminalinfomodel.h \
+    dao/terminalinfodao.h \
+    service/terminalinfoservice.h \
+    service/terminalviewservice.h
 
 DISTFILES +=

@@ -17,6 +17,8 @@ ConnectController::ConnectController(QObject *parent)
 {
     this->m_server = new ServerService(this);
     this->m_tService = new TerminalService(this);
+    this->m_tiService = new TerminalInfoService(this);
+    this->m_terminalViewService = new TerminalViewService(this);
 }
 
 ServerModel *ConnectController::serverModel()
@@ -36,11 +38,19 @@ void ConnectController::saveConfig()
 
 void ConnectController::getAllTermianl()
 {
-    m_tService->test();
+    //m_tService->test();
+    m_tiService->test();
+
+    m_terminalViewService->getDateTimes();
 }
 
-QSqlQueryModel *ConnectController::sqlModel()
+QSqlQueryModel *ConnectController::terminalViewModel(int offset, int limit)
 {
-    return m_tService->testSql();
+    return m_terminalViewService->terminalView(offset * limit, limit);
+}
+
+int ConnectController::getTerminalViewPages(int limit)
+{
+    return m_terminalViewService->getPages(limit);
 }
 
