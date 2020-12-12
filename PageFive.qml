@@ -2,20 +2,20 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtCharts 2.0
 
-import MyInterface 1.8
+import MyInterface 1.9
 
 Item {
     id: root
 
     property var locale: Qt.locale()
-    property var dateFormat: "yyyy-MM-dd hh:mm:ss"
+    property string dateFormat: "yyyy-MM-dd hh:mm:ss"
 
     property real limit: 5
     property real offset: 0
     property real pages: ConnectController.getTerminalViewPages(limit)
     property QSqlQueryModel sqlQueryModel: ConnectController.terminalViewModel(offset, limit)
 
-    onOffsetChanged: chartView.updateLine(spline1, sqlQueryModel)
+    onOffsetChanged: chartView.updateLine(spline1, ConnectController.getTimeAndCurrent())
 
     Column{
         anchors.fill: parent
@@ -127,28 +127,23 @@ Item {
                          XYPoint { x: 10; y: 2.3 }
                 }
 
-                function updateLine(spline, queryModel)
+                Component.onCompleted: {
+                    updateLine(spline1, ConnectController.getTimeAndCurrent())
+                }
+
+                function updateLine(spline, dataObject)
                 {
-                    if(queryModel.rowCount() === 0)
+                    if(dataObject.length === 0)
                         return;
 
                     var dateStr = [];
                     var dataS = [];
-                    var i = 0;
-                    for(i = 0;i < queryModel.rowCount(); ++ i)
-                    {
-                        var parts = queryModel.data(sqlQueryModel.index(i, 7)).toString().split(".");
-                        dateStr.push(parts[0]);
-                        dataS.push(Number(queryModel.data(queryModel.index(i, 3))));
+                    for(var prop in dataObject) {
+                        var dateForm = Date.fromLocaleString(locale, prop.split(".")[0], dateFormat);
+                        dateStr.push(dateForm.getTime());
+                        dataS.push(dataObject[prop]);
+
                     }
-
-
-                    for (i = 0;i < dateStr.length; i++)
-                    {
-                        var dateForm = Date.fromLocaleString(locale, dateStr[i], dateFormat);
-                        dateStr[i] = dateForm.getTime();
-                    }
-
                     axisX.max = new Date(Math.max.apply(null, dateStr));
                     axisX.min = new Date(Math.min.apply(null, dateStr));
                     axisX.tickCount = dateStr.length;
@@ -157,17 +152,11 @@ Item {
                     axisY.min = Math.min.apply(null, dataS) * 0.9;
                     axisY.tickCount = dataS.length;
 
-
                     spline.clear()
-                    for (i = 0;i < dateStr.length; i++)
+                    for (var i = 0;i < dateStr.length; i++)
                     {
-                        spline.append(dateStr[i], dataS[i]);
-                        console.log(dataS[i]);
+                        spline.append(dateStr[i], dataS[i])
                     }
-                }
-
-                Component.onCompleted: {
-                    updateLine(spline1, sqlQueryModel);
                 }
             }
 

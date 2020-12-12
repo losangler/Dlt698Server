@@ -13,6 +13,8 @@ int TerminalViewService::getPages(int limit)
 {
     if(limit <= 0)
        return 0;
+    if(m_terminalView == nullptr)
+        this->terminalView();
 
     DbManager manager;
     manager.query().prepare("select count(*) from v_terminal");
@@ -24,12 +26,18 @@ int TerminalViewService::getPages(int limit)
     return 0;
 }
 
-QList<QString> TerminalViewService::getDateTimes()
+QVariantMap TerminalViewService::getDateTimesAndCurrent()
 {
-    QList<QString> res;
+    if(m_terminalView == nullptr)
+        this->terminalView();
+
+    QVariantMap res;
+    int colTime = m_terminalView->record().indexOf("date_time");
+    int colCurrent = m_terminalView->record().indexOf("current");
     for(int i = 0;i < m_terminalView->rowCount(); ++ i)
     {
-        res.append(m_terminalView->data(m_terminalView->index(i, 7)).toString());
+        res.insert(m_terminalView->data(m_terminalView->index(i, colTime)).toString(),
+                   m_terminalView->data(m_terminalView->index(i, colCurrent)));
     }
     return res;
 }

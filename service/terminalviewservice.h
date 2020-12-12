@@ -11,7 +11,7 @@ public:
 
 
     int getPages(int limit = 10);
-    QList<QString> getDateTimes();
+    QVariantMap getDateTimesAndCurrent();
 
     QSqlQueryModel *terminalView(int offset = 0, int limit = 10);
     void setTerminalView(QSqlQueryModel *terminalView);

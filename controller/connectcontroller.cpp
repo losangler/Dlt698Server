@@ -40,8 +40,6 @@ void ConnectController::getAllTermianl()
 {
     //m_tService->test();
     m_tiService->test();
-
-    m_terminalViewService->getDateTimes();
 }
 
 QSqlQueryModel *ConnectController::terminalViewModel(int offset, int limit)
@@ -52,5 +50,10 @@ QSqlQueryModel *ConnectController::terminalViewModel(int offset, int limit)
 int ConnectController::getTerminalViewPages(int limit)
 {
     return m_terminalViewService->getPages(limit);
+}
+
+QVariantMap ConnectController::getTimeAndCurrent()
+{
+    return m_terminalViewService->getDateTimesAndCurrent();
 }
 

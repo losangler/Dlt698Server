@@ -25,6 +25,8 @@ public:
 
     Q_INVOKABLE int getTerminalViewPages(int limit = 10);
 
+    Q_INVOKABLE QVariantMap getTimeAndCurrent();
+
     static QObject *singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine);
 
 private:

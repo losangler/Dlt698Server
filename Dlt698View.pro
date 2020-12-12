@@ -28,7 +28,6 @@ SOURCES += main.cpp \
     model/terminalinfomodel.cpp \
     dao/terminalinfodao.cpp \
     service/terminalinfoservice.cpp \
-    util/sqltablemanager.cpp \
     service/terminalviewservice.cpp
 
 RESOURCES += qml.qrc
@@ -66,6 +65,7 @@ HEADERS += \
     model/terminalinfomodel.h \
     dao/terminalinfodao.h \
     service/terminalinfoservice.h \
-    service/terminalviewservice.h
+    service/terminalviewservice.h \
+    config/log.h
 
 DISTFILES +=

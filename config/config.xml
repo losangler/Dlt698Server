@@ -1,5 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <config>
+    <log>
+        <enable>false</enable>
+        <level>1</level><!--enum QtMsgType { QtDebugMsg = 0, QtWarningMsg = 1, QtCriticalMsg = 2, QtFatalMsg = 3, QtInfoMsg = 4, QtSystemMsg = QtCriticalMsg }-->
+        <filePath>./</filePath>
+    </log>
     <connection>
         <server>
             <port>9999</port>
